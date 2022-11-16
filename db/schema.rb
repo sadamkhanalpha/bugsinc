@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20221115151956) do
   create_table "bugs", force: :cascade do |t|
     t.text     "description"
     t.string   "title"
-    t.date     "deadline"
+    t.datetime "deadline"
     t.text     "screenshot"
     t.string   "bugType"
     t.integer  "creator_id_id"
@@ -30,9 +30,11 @@ ActiveRecord::Schema.define(version: 20221115151956) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "manager_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "user_projects", force: :cascade do |t|
@@ -42,15 +44,6 @@ ActiveRecord::Schema.define(version: 20221115151956) do
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_user_projects_on_project_id"
     t.index ["user_id"], name: "index_user_projects_on_user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "usertype"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

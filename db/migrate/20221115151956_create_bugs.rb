@@ -3,7 +3,7 @@ class CreateBugs < ActiveRecord::Migration[5.0]
     create_table :bugs do |t|
       t.text :description
       t.string :title
-      t.date :deadline
+      t.datetime :deadline
       t.text :screenshot
       t.string :bugType
       t.references :creator_id, foreign_key: true

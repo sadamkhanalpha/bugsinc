@@ -1,0 +1,34 @@
+<h1>Add New User</h1>
+<%= form_for @user do |user| %>
+    <% if @user.errors.any? %>
+    <p>There were <%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</p>
+       <% @user.errors.full_messages.each do |msg| %>
+       <li><%= msg %></li>
+       <% end %>
+    <% end %>
+	<div>
+		<%= user.label :name %>
+	</div>
+	<br>
+	<div>
+		<%= user.text_field :name %>
+	</div>
+	<div>
+		<%= user.label :email %>
+	</div>
+	<br>
+	<div>
+		<%= user.text_field :email %>
+	</div>
+	<div>
+		<%= user.label :password %>
+	</div>
+	<br>
+	<div>
+		<%= user.text_field :password %>
+	</div>
+	<%= user.select(:usertype, options_for_select([["Developer", "Developer"], ["QA", "QA"], ["Manager", "Manager"]], :selected => 'Developer' ), :include_blank => false) %>
+	<div>
+		<%= user.submit "Create Now" %>
+	</div>
+<% end %>
